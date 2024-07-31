@@ -1,0 +1,29 @@
+.titleH1 {
+  font-size: 20px;
+}
+.descriptionH2 {
+  font-size: 15px;
+  font-weight: normal;
+}
+.formEdit {
+  width: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+  margin-bottom: 20px;
+}
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  background-color: #ffffff;
+  padding: 20px;
+}
