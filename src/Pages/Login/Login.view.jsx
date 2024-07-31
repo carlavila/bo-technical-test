@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React from 'react';
 import { Form, Field } from 'react-final-form';
 import { loginImagePath, legalText } from '../../config';
 import { palette } from '../../muiTheme';
@@ -8,8 +8,16 @@ import { Link } from 'react-router-dom';
 import styles from './login.module.scss';
 
 function LoginView({ onSubmit, errorMsg, validate }) {
+  const backGroundStyle = loginImagePath
+    ? {
+        backgroundImage: `url(${loginImagePath})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }
+    : { backgroundColor: palette.primary.main };
+
   return (
-    <div className={styles.loginWrapper}>
+    <div className={styles.loginWrapper} style={backGroundStyle}>
       <Form onSubmit={onSubmit} validate={validate}>
         {({ handleSubmit, invalid }) => {
           return (
