@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-
 import UserContext from '../../context/userContext';
 import { LanguageContext } from '../../context/languageContext';
 import languageConstants from '../../constants/languagesConstants';
@@ -46,22 +45,32 @@ function LoginContainer() {
     }
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     setErrorMsg(null);
     try {
-      const auth = AuthAPI.login(values);
+      const auth = await AuthAPI.login(values);
       const headersWithToken = { ...headers, Authorization: `Bearer ${auth.accessToken}` };
-      const userMainData = UsersAPI.fetchMe(headersWithToken);
-      const userData = UsersAPI.fetchContext(headersWithToken);
+      const userMainData = await UsersAPI.fetchMe(headersWithToken);
+      const userData = await UsersAPI.fetchContext(headersWithToken);
       axios.defaults.headers.common = { ...headersWithToken, 'x-account-key': userData.accountKey };
       delete userData.password;
-
       setUser({ ...userData, ...userMainData, ...auth });
       setInitialLanguage(userMainData?.meta?.language);
       redirectUser();
     } catch (error) {
       setErrorMsg('Connection error');
     }
+  };
+
+  const validate = (values) => {
+    const errors = {};
+    if (!values?.username) {
+      errors.username = "Can't be empty";
+    }
+    if (!values?.password) {
+      errors.password = "Can't be empty";
+    }
+    return errors;
   };
 
   useEffect(() => {
@@ -73,7 +82,7 @@ function LoginContainer() {
 
   return (
     <div>
-      <LoginView onSubmit={handleSubmit} errorMsg={errorMsg} />
+      <LoginView onSubmit={handleSubmit} errorMsg={errorMsg} validate={validate} />
     </div>
   );
 }

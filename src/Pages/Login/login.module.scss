@@ -24,6 +24,18 @@ $lightGray2: #757575;
   background-color: #ffffff;
 }
 
+.errorMsg {
+  text-align: center;
+  font-size: 12px;
+  color: red;
+  margin-bottom: 30px;
+}
+
+.copyrightText {
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
 .link {
   text-decoration: none;
   text-align: right;
@@ -35,20 +47,7 @@ $lightGray2: #757575;
     color: $lightGray2;
   }
 }
+
 .link:hover {
   color: #212529;
-}
-
-.btn {
-  width: 100px;
-}
-
-.errorMsg {
-  text-align: center;
-  color: red;
-}
-
-.copyrightText {
-  color: #ffffff;
-  margin-bottom: 10px;
 }
